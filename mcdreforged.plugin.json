@@ -1,10 +1,10 @@
  {
-	"id": "example_plugin",
-	"version": "1.0.0",
-	"name": "Example Plugin",
-	"description": "Example plugin for MCDR",
-	"author": "Fallen_Breath",
-	"link": "https://github.com/MCDReforged/MCDReforged-ExamplePlugin",
+	"id": "server_redirect",
+	"version": "0.1.0",
+	"name": "Server Redirect",
+	"description": "An plugin for use with ServerDirect Mod in Minecraft",
+	"author": "Cmmmmmm",
+	"link": "https://github.com/CmmmmmmLau/ServerRedirect",
 	"dependencies": {
 		"mcdreforged": ">=2.0.0-alpha.1"
 	}
