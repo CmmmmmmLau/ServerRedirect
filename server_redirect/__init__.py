@@ -2,8 +2,7 @@ import re
 
 from mcdreforged.api.all import *
 
-from server_redirect import my_lib
-
+from . import my_lib
 # variant for functionality demo
 counter = 0
 

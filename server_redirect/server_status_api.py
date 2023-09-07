@@ -1,5 +1,6 @@
 import socket
 import struct
+import json
 
 
 def readVarInt(sock: socket.socket):
@@ -42,7 +43,16 @@ def writePackage(data):
     return packageLength + data
 
 
-def requestServerStatus(host='localhost', port=25565):
+def getPlayerList(data: dict):
+    playerList = []
+    keys = data.get("players").get("sample")
+    for key in keys:
+        playerList.append(key.get("name"))
+
+    return playerList
+
+
+def getServerStatusPackage(host='localhost', port=25565):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
@@ -60,5 +70,19 @@ def requestServerStatus(host='localhost', port=25565):
 
     sock.close()
 
-# TODO
-# maybe a class object here for used to access data
+    return jsonString
+
+
+def getServerStatus(host='localhost', port=25565):
+    return ServerStatus(json.loads(getServerStatusPackage(host, port)))
+
+
+class ServerStatus:
+    def __init__(self, data: dict):
+        self.description = data.get("description").get("text")
+        self.version = data.get("version").get("name")
+        self.online = data.get("players").get("online")
+        self.max = data.get("players").get("max")
+        self.playerList = getPlayerList(data)
+
+# TODO add SRV support
