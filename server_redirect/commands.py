@@ -6,7 +6,7 @@ from mcdreforged.plugin.server_interface import PluginServerInterface
 from . import constants
 
 
-def registerCommand(server: PluginServerInterface, config: dict):
+def registerCommand(server: PluginServerInterface, config: constants.ServerList):
     def getLiteral(literal: str, permission: int):
         return Literal(literal).requires(lambda src: src.has_permission(permission)) \
             .on_error(RequirementNotMet, lambda src: src.reply("Permission Denied"), handled=True)
@@ -15,7 +15,7 @@ def registerCommand(server: PluginServerInterface, config: dict):
     nodeList = getLiteral("list", 1).runs(lambda src: src.reply("Hello world from list!"))
     nodeRedirect = getLiteral("redirect", 3).runs(lambda src: src.reply("Redirect!"))
 
-    for key, value in config.items():
+    for key, value in config.serverList.items():
         nodeServer = Literal(key).then(Text("Target Player"))
         nodeRedirect.then(nodeServer)
 

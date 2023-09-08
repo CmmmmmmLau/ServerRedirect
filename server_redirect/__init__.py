@@ -4,10 +4,10 @@ from mcdreforged.api.all import *
 
 from . import commands, constants
 
-
+config = constants.ServerList
 def on_load(server: PluginServerInterface, old_module):
-	config = constants.config
-	server.load_config_simple("ServerList.json", config)
+	global config
+	config = server.load_config_simple("ServerList.json", target_class=constants.ServerList)
 	commands.registerCommand(server, config)
 
 
