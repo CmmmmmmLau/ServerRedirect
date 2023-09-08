@@ -2,25 +2,13 @@ import re
 
 from mcdreforged.api.all import *
 
-from . import my_lib
-# variant for functionality demo
-counter = 0
+from . import commands, constants
 
 
 def on_load(server: PluginServerInterface, old_module):
-	"""
-	Do some clean up when your plugin is being loaded
-	Like migrating data, reading config file or adding help messages
-	old_module is the previous plugin instance. If the plugin is freshly loaded it will be None
-	"""
-	global counter
-	if old_module is not None:
-		counter = old_module.counter + 1
-	else:
-		counter = 1
-	msg = f'This is the {counter} time to load the plugin'
-	server.logger.info(msg)
-	my_lib.register(server)
+	config = constants.config
+	server.load_config_simple("ServerList.json", config)
+	commands.registerCommand(server, config)
 
 
 def on_unload(server: PluginServerInterface):
