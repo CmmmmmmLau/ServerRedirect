@@ -13,8 +13,8 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
 
     nodeRoot = getLiteral(constants.PREFIX, 1)
     nodeList = getLiteral("list", 1).runs(lambda src: src.reply("Hello world from list!"))
-    nodeRedirect = getLiteral("redirect", 3).runs(lambda src: src.reply("Redirect!"))
 
+    nodeRedirect = getLiteral("redirect", 3).runs(lambda src: src.reply("Redirect!"))
     for key, value in config.serverList.items():
         nodeServer = Literal(key).then(Text("Target Player"))
         nodeRedirect.then(nodeServer)

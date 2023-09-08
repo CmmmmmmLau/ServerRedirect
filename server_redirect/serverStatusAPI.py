@@ -46,8 +46,9 @@ def writePackage(data):
 def getPlayerList(data: dict):
     playerList = []
     keys = data.get("players").get("sample")
-    for key in keys:
-        playerList.append(key.get("name"))
+    if keys:
+        for key in keys:
+            playerList.append(key.get("name"))
 
     return playerList
 
