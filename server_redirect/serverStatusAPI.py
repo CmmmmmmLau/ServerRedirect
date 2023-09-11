@@ -54,28 +54,36 @@ def getPlayerList(data: dict):
 
 
 def getServerStatusPackage(host='localhost', port=25565):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((host, port))
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((host, port))
 
-    dataPackage = b"\x00\x00" + writeHost(host) + writePort(port) + b"\x01"
-    sock.send(writePackage(dataPackage))
-    sock.send(writePackage(b"\x00"))
+        dataPackage = b"\x00\x00" + writeHost(host) + writePort(port) + b"\x01"
+        sock.send(writePackage(dataPackage))
+        sock.send(writePackage(b"\x00"))
 
-    packageLength = readVarInt(sock)
-    packageID = readVarInt(sock)
-    stringLength = readVarInt(sock)
+        packageLength = readVarInt(sock)
+        packageID = readVarInt(sock)
+        stringLength = readVarInt(sock)
 
-    jsonString = b""
-    while len(jsonString) < stringLength:
-        jsonString += sock.recv(1024)
+        jsonString = b""
+        while len(jsonString) < stringLength:
+            jsonString += sock.recv(1024)
 
-    sock.close()
+        sock.close()
 
-    return jsonString
+        return jsonString
+    except ConnectionRefusedError as error:
+        print(f"Failed to connect to server: {host}:{port}")
+        return None
 
 
 def getServerStatus(host='localhost', port=25565):
-    return ServerStatus(json.loads(getServerStatusPackage(host, port)))
+    statusPackage = getServerStatusPackage(host, port)
+    if statusPackage:
+        return ServerStatus(json.loads(statusPackage))
+    else:
+        return None
 
 
 class ServerStatus:

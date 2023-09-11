@@ -5,8 +5,8 @@ server_redirect:
     §2 {prefix} list §r: Display the status of server group
     §2 {prefix} redirect §2<Target Server> §2<Target Player>§r: Redirect player to target server
 
-  online: §4 Online
+  online: "§4 Online:"
   offline: §4 Offline
 
-  player_list: "Online players:"
+  player_list: "Online Players:"
 
