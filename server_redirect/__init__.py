@@ -2,7 +2,7 @@ import re
 
 from mcdreforged.api.all import *
 
-from . import commands, constants, serverStatusAPI
+from . import commands, constants
 
 config = constants.ServerList
 
@@ -11,7 +11,6 @@ def on_load(server: PluginServerInterface, old_module):
     global config
     config = server.load_config_simple("ServerList.json", target_class=constants.ServerList)
     commands.registerCommand(server, config)
-
 
 def on_unload(server: PluginServerInterface):
     """

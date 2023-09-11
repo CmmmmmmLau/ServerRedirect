@@ -1,9 +1,21 @@
 from mcdreforged.command.builder.exception import RequirementNotMet
 from mcdreforged.command.builder.nodes.arguments import Text
 from mcdreforged.command.builder.nodes.basic import Literal
-from mcdreforged.plugin.server_interface import PluginServerInterface
+from mcdreforged.command.command_source import CommandSource
+from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
+from mcdreforged.translation.translation_text import RTextMCDRTranslation
 
 from . import constants
+
+
+def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
+    return ServerInterface.get_instance().as_plugin_server_interface().rtr(f"server_redirect.{I18nKey}", *args,
+                                                                           **kwargs)
+
+
+def printHelpMessage(source: CommandSource):
+    meta = constants.meta
+    source.reply(rtr("help", name=meta.name, version=meta.version))
 
 
 def registerCommand(server: PluginServerInterface, config: constants.ServerList):
@@ -11,7 +23,7 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
         return Literal(literal).requires(lambda src: src.has_permission(permission)) \
             .on_error(RequirementNotMet, lambda src: src.reply("Permission Denied"), handled=True)
 
-    nodeRoot = getLiteral(constants.PREFIX, 1)
+    nodeRoot = getLiteral(constants.PREFIX, 1).runs(printHelpMessage)
     nodeList = getLiteral("list", 1).runs(lambda src: src.reply("Hello world from list!"))
 
     nodeRedirect = getLiteral("redirect", 3).runs(lambda src: src.reply("Redirect!"))
@@ -24,5 +36,7 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
         .then(nodeList)
         .then(nodeRedirect)
     )
+
+    server.register_help_message("!!online", "Something here")
 
 # TODO implement command function

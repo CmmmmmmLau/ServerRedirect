@@ -1,0 +1,4 @@
+server_redirect:
+  help: |
+    ~~~~~~~~~ {name} ~~~~ v.{version} ~~~~~~~~~
+    Some information here
