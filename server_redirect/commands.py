@@ -15,7 +15,7 @@ def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
 
 def printHelpMessage(source: CommandSource):
     meta = constants.meta
-    source.reply(rtr("help", name=meta.name, version=meta.version))
+    source.reply(rtr("help", prefix=constants.PREFIX, name=meta.name, version=meta.version))
 
 
 def registerCommand(server: PluginServerInterface, config: constants.ServerList):
