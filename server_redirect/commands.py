@@ -7,7 +7,7 @@ from mcdreforged.command.builder.exception import RequirementNotMet
 from mcdreforged.command.builder.nodes.arguments import Text
 from mcdreforged.command.builder.nodes.basic import Literal
 from mcdreforged.command.command_source import CommandSource, PlayerCommandSource
-from mcdreforged.minecraft.rtext.style import RColor
+from mcdreforged.minecraft.rtext.style import RColor, RStyle
 from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
 from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
@@ -43,12 +43,13 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
 
     text = ""
     for i in range(len(serverName)):
-        text += RText(f"{serverName[i]:<15}", color=RColor.yellow).set_click_event(RAction.run_command,
-                                                                                   f"!!server {serverName[i]}")
+        text += RText(f"{serverName[i]:<15}", color=RColor.yellow)
         if serverStatus[i]:
             text += RTextList(
                 RText(rtr("online")),
-                RText(f" {serverStatus[i].online:<2}/{serverStatus[i].max} ")
+                RText(f" {serverStatus[i].online:<2}/{serverStatus[i].max} "),
+                RText(rtr("join"), color=RColor.yellow, styles=[RStyle.underlined, RStyle.bold])
+                .set_click_event(RAction.run_command, f"!!server {serverName[i]}")
             )
             text += RTextList(
                 RText(rtr("player_list")),

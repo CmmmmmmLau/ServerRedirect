@@ -14,6 +14,8 @@ server_redirect:
 
   error_1: "Target Server not found!"
 
+  join: "§n§l§oJoin"
+
   redirect:
     miss_argument: "Missing arguments: §7<Target Server> §rand §7<Target Player>"
     info_1: "Redirecting player: §e{player} → §e{server}"
