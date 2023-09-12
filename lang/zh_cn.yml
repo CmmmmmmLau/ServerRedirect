@@ -7,6 +7,10 @@ server_redirect:
   help_summary: "和ServerRedirect模组配合使用的MCDR插件"
 
   denied: "权限不足"
+  c_only: "该指令只限运行在客户端"
+  s_only: "该指令只限运行在服务端"
+
+  error_1: "目标服务器不存在"
 
   redirect:
     miss_argument: "缺失参数: §7<Target Server> §r和 §7<Target Player>"
