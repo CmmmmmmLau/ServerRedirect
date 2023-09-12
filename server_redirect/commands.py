@@ -19,6 +19,13 @@ def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
     return ServerInterface.get_instance().rtr(f"server_redirect.{I18nKey}", *args, **kwargs)
 
 
+def executeCommand(source: CommandSource, command:str):
+    if source.get_server().get_mcdr_config().get("handler") == "forge_handler":
+        source.get_server().execute(command)
+    else:
+        source.get_server().execute(command)
+
+
 def printHelpMessage(source: CommandSource):
     meta = constants.meta
     source.reply(rtr("help", prefix=constants.PREFIX, name=meta.name, version=meta.version))
@@ -36,7 +43,7 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
 
     text = ""
     for i in range(len(serverName)):
-        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command, f"!!server {serverName}")
+        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command, f"!!server {serverName[i]}")
         if serverStatus[i]:
             text += RTextList(
                 RText(rtr("online")),
@@ -73,10 +80,7 @@ def selfRedirect(source: CommandSource, context: dict, config: constants.ServerL
         if target in config.serverList:
             address = config.serverList.get(target).address
             port = config.serverList.get(target).port
-            if source.get_server().get_mcdr_config().get("handler") == "forge_handler":
-                source.get_server().execute(f"/redirect {source.player} {address}:{port}")
-            else:
-                source.get_server().execute(f"redirect {source.player} {address}:{port}")
+            executeCommand(source, f"/redirect {source.player} {address}:{port}")
         else:
             source.reply(rtr("error_1"))
     else:
