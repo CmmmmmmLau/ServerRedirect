@@ -4,9 +4,17 @@ server_redirect:
     §2 {prefix}§r: Display Server Redirect help information
     §2 {prefix} list §r: Display the status of server group
     §2 {prefix} redirect §2<Target Server> §2<Target Player>§r: Redirect player to target server
+  help_summary: "A MCDR plugin for use with ServerDirect Mod in Minecraft"
 
-  online: "§4 Online:"
-  offline: §4 Offline
+  denied: "Permission Denied"
 
-  player_list: "Online Players:"
+  redirect:
+    miss_argument: "Missing arguments: §7<Target Server> §rand §7<Target Player>"
+    info_1: "Redirecting player: {player} → {server}"
+    info_2: "You will be redirecting to server: §2{server} §rin §e5 §rseconds"
+
+  online: "§2 Online:"
+  offline: "§4 Offline"
+
+  player_list: "§a Online Players: "
 

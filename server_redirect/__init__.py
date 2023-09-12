@@ -15,6 +15,6 @@ def on_load(server: PluginServerInterface, old_module):
 
 def on_player_joined(server: PluginServerInterface, player: str, info: Info):
     global config
-    commands.printServerList(server.get_plugin_command_source(), config)
+    commands.printServerList(player, config)
 
 
