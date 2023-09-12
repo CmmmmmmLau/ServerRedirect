@@ -3,7 +3,8 @@ Server Redirect
 
 [简体中文](./README.md) | **English**
 
-An [MCDReforged](https://github.com/Fallen-Breath/MCDReforged) plugin for use with [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) Mod in Minecraft
+An [MCDReforged](https://github.com/Fallen-Breath/MCDReforged) plugin for use with [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) Mod in Minecraft. 
+Be noticed, this MCDReforged used the same name of `Server Redirect` mod/plugin in Minecraft, but it is two different thing.
 
 ***
 ## Introduction

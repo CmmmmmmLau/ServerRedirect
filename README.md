@@ -3,11 +3,11 @@ Server Redirect
 
 **简体中文** | [English](./README_en.md)
 
-一个用来与 [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) 模组/插件 配合使用的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件.
+一个用来与另一个同名的 [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) 模组/插件 配合使用的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件.
 
 ***
 ## 介绍
-该插件必须要与 `Server Redirect` 模组/插件共同使用. 这个插件能够在不给予玩家任何 `Server Redirect` 指令权限的情况下让其跳转到任务服务器.
+该插件必须要与 `Server Redirect` 模组/插件共同使用. 这个插件能够在不给予玩家任何 `Server Redirect` 指令权限的情况下让其跳转到指定服务器.
 
 如果你想要搭建一个高版本(>1.12.2)的模组服, 但却又因为`Waterfall` 和 `Velocity` 又不支持, 那么这个插件是一个轻量化的解决方案.
 
