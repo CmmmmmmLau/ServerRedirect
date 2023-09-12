@@ -1,8 +1,7 @@
-import re
-
 from mcdreforged.api.all import *
 
-from . import commands, constants
+import commands
+import constants
 
 config = constants.ServerList
 
@@ -16,5 +15,3 @@ def on_load(server: PluginServerInterface, old_module):
 def on_player_joined(server: PluginServerInterface, player: str, info: Info):
     global config
     commands.printServerList(player, config)
-
-

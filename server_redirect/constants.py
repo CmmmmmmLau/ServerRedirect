@@ -1,7 +1,7 @@
 from typing import Dict
 
-from mcdreforged.utils.serializer import Serializable
 from mcdreforged.plugin.server_interface import ServerInterface
+from mcdreforged.utils.serializer import Serializable
 
 PREFIX = "!!server"
 

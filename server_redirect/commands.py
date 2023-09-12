@@ -8,11 +8,12 @@ from mcdreforged.command.builder.nodes.arguments import Text
 from mcdreforged.command.builder.nodes.basic import Literal
 from mcdreforged.command.command_source import CommandSource, PlayerCommandSource
 from mcdreforged.minecraft.rtext.style import RColor
+from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
 from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
-from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
 
-from . import constants, serverStatusAPI
+import constants
+import serverStatusAPI
 
 
 def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
@@ -43,7 +44,8 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
 
     text = ""
     for i in range(len(serverName)):
-        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command, f"!!server {serverName[i]}")
+        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command,
+                                                                          f"!!server {serverName[i]}")
         if serverStatus[i]:
             text += RTextList(
                 RText(rtr("online")),

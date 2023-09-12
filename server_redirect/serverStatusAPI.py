@@ -1,6 +1,6 @@
+import json
 import socket
 import struct
-import json
 
 
 def readVarInt(sock: socket.socket):
