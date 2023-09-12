@@ -94,4 +94,4 @@ class ServerStatus:
         self.max = data.get("players").get("max")
         self.playerList = getPlayerList(data)
 
-# TODO add SRV support
+# TODO add SRV support(MAYBE NOT)

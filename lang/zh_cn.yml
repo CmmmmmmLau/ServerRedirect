@@ -4,6 +4,7 @@ server_redirect:
     §2 {prefix}§r: 显示该插件的帮助信息
     §2 {prefix} <Target Server>§r: 将自己转发到指定服务器
     §2 {prefix} list §r: 显示服务器群组的状态
+    §2 {prefix} reload§r: 重载配置文件. 如果不起效请通过 §2!!MCDR plugin §r手动重载插件
     §2 {prefix} redirect §2<Target Server> §2<Target Player>§r: 将玩家转发到指定的服务器
   help_summary: "和ServerRedirect模组配合使用的MCDR插件"
 

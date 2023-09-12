@@ -43,12 +43,12 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
 
     text = ""
     for i in range(len(serverName)):
-        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command,
-                                                                          f"!!server {serverName[i]}")
+        text += RText(f"{serverName[i]:<15}", color=RColor.yellow).set_click_event(RAction.run_command,
+                                                                                   f"!!server {serverName[i]}")
         if serverStatus[i]:
             text += RTextList(
                 RText(rtr("online")),
-                RText(f" {serverStatus[i].online}/{serverStatus[i].max} ")
+                RText(f" {serverStatus[i].online:<2}/{serverStatus[i].max} ")
             )
             text += RTextList(
                 RText(rtr("player_list")),
@@ -105,7 +105,8 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
                   .runs(functools.partial(redirectPlayer, server=key, config=value)))
         nodeRedirect.then(nodeServer)
 
-    nodeReload = getLiteral("reload", 3).runs(lambda src: server.load_config_simple("ServerList.json", target_class=constants.ServerList))
+    nodeReload = getLiteral("reload", 3).runs(
+        lambda src: server.load_config_simple("ServerList.json", target_class=constants.ServerList))
 
     server.register_command(
         nodeRoot
