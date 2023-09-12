@@ -19,9 +19,9 @@ def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
     return ServerInterface.get_instance().rtr(f"server_redirect.{I18nKey}", *args, **kwargs)
 
 
-def executeCommand(source: CommandSource, command:str):
+def executeCommand(source: CommandSource, command: str):
     if source.get_server().get_mcdr_config().get("handler") == "forge_handler":
-        source.get_server().execute(command)
+        source.get_server().execute("/" + command)
     else:
         source.get_server().execute(command)
 
@@ -63,14 +63,14 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
         ServerInterface.get_instance().tell(source, text)
 
 
-def redirectPlayer(source: CommandSource, context: dict, server: str):
+def redirectPlayer(source: CommandSource, context: dict, server: str, config: constants.ServerConfig):
     player = context["Target Player"]
     source.reply(rtr("redirect.info_1", player=player, server=server))
     source.get_server().get_instance().tell(player, rtr("redirect.info_2", server=server))
     for i in range(5, 0, -1):
         source.get_server().get_instance().tell(player, f"§e ~~~~ {i} ~~~~")
         time.sleep(1)
-    source.get_server().get_instance().execute(f"/list")
+    executeCommand(source, f"redirect {player} {config.address}:{config.port}")
 
 
 @new_thread
@@ -80,7 +80,7 @@ def selfRedirect(source: CommandSource, context: dict, config: constants.ServerL
         if target in config.serverList:
             address = config.serverList.get(target).address
             port = config.serverList.get(target).port
-            executeCommand(source, f"/redirect {source.player} {address}:{port}")
+            executeCommand(source, f"redirect {source.player} {address}:{port}")
         else:
             source.reply(rtr("error_1"))
     else:
@@ -101,7 +101,7 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
     for key, value in config.serverList.items():
         nodeServer = getLiteral(key, 3).runs(functools.partial(selfRedirect, server=key)) \
             .then(Text("Target Player")
-                  .runs(functools.partial(redirectPlayer, server=key)))
+                  .runs(functools.partial(redirectPlayer, server=key, config=value)))
         nodeRedirect.then(nodeServer)
 
     server.register_command(
