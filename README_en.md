@@ -13,6 +13,10 @@ It can allow you redirect player to other server without giving any permissions 
 If you are looking for build a high version modded Minecraft(>1.12) server group. But `Waterfall` or `Velocity` not support it yet. Then here is another lightweight solution for you!
 
 ***
+## Demo
+![demo](./demo/demo.gif)
+
+***
 ## Note
 `Server Redirect` mod/plugin **must** be installed on both `Server` and `Client` side. This MCDReforged plugin doesn't include any proxy function for minecraft, it just can help you build a better Minecraft server group in high version of Forge/Fabric Server.
 
