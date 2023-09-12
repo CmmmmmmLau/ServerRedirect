@@ -7,6 +7,10 @@ server_redirect:
   help_summary: "A MCDR plugin for use with ServerDirect Mod in Minecraft"
 
   denied: "Permission Denied"
+  c_only: "This command only can be used on client!"
+  s_only: "This command only can be used on server!"
+
+  error_1: "Target Server not found!"
 
   redirect:
     miss_argument: "Missing arguments: §7<Target Server> §rand §7<Target Player>"

@@ -6,7 +6,7 @@ from mcdreforged.api.decorator import new_thread
 from mcdreforged.command.builder.exception import RequirementNotMet
 from mcdreforged.command.builder.nodes.arguments import Text
 from mcdreforged.command.builder.nodes.basic import Literal
-from mcdreforged.command.command_source import CommandSource
+from mcdreforged.command.command_source import CommandSource, PlayerCommandSource
 from mcdreforged.minecraft.rtext.style import RColor
 from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
@@ -36,7 +36,7 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
 
     text = ""
     for i in range(len(serverName)):
-        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command, f"/list")
+        text += RText(serverName[i], color=RColor.yellow).set_click_event(RAction.run_command, f"!!server {serverName}")
         if serverStatus[i]:
             text += RTextList(
                 RText(rtr("online")),
@@ -66,6 +66,23 @@ def redirectPlayer(source: CommandSource, context: dict, server: str):
     source.get_server().get_instance().execute(f"/list")
 
 
+@new_thread
+def selfRedirect(source: CommandSource, context: dict, config: constants.ServerList):
+    if isinstance(source, PlayerCommandSource):
+        target = context["Target Server"]
+        if target in config.serverList:
+            address = config.serverList.get(target).address
+            port = config.serverList.get(target).port
+            if source.get_server().get_mcdr_config().get("handler") == "forge_handler":
+                source.get_server().execute(f"/redirect {source.player} {address}:{port}")
+            else:
+                source.get_server().execute(f"redirect {source.player} {address}:{port}")
+        else:
+            source.reply(rtr("error_1"))
+    else:
+        source.reply(rtr("c_only"))
+
+
 def registerCommand(server: PluginServerInterface, config: constants.ServerList):
     def getLiteral(literal: str, permission: int):
         return Literal(literal).requires(lambda src: src.has_permission(permission)) \
@@ -73,18 +90,21 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
 
     nodeRoot = getLiteral(constants.PREFIX, 1).runs(printHelpMessage)
     nodeList = getLiteral("list", 1).runs(functools.partial(printServerList, config=config))
+    nodeSelfRedirect = Text("Target Server").runs(functools.partial(selfRedirect, config=config))
 
     nodeRedirect = getLiteral("redirect", 3).runs(lambda src: src.reply(rtr("redirect.miss_argument")))
 
     for key, value in config.serverList.items():
-        nodeServer = Literal(key) \
-            .then(Text("Target Player").runs(functools.partial(redirectPlayer, server=key)))
+        nodeServer = getLiteral(key, 3).runs(functools.partial(selfRedirect, server=key)) \
+            .then(Text("Target Player")
+                  .runs(functools.partial(redirectPlayer, server=key)))
         nodeRedirect.then(nodeServer)
 
     server.register_command(
         nodeRoot
         .then(nodeList)
         .then(nodeRedirect)
+        .then(nodeSelfRedirect)
     )
 
     server.register_help_message("!!online", rtr("help_summary"))
