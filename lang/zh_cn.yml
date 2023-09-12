@@ -2,6 +2,7 @@ server_redirect:
   help: |
     ~~~~~~~~~ {name} ~~~~ v.{version} ~~~~~~~~~
     §2 {prefix}§r: 显示该插件的帮助信息
+    §2 {prefix} <Target Server>§r: 将自己转发到指定服务器
     §2 {prefix} list §r: 显示服务器群组的状态
     §2 {prefix} redirect §2<Target Server> §2<Target Player>§r: 将玩家转发到指定的服务器
   help_summary: "和ServerRedirect模组配合使用的MCDR插件"
@@ -14,7 +15,7 @@ server_redirect:
 
   redirect:
     miss_argument: "缺失参数: §7<Target Server> §r和 §7<Target Player>"
-    info_1: "正在将玩家跳转至目标服务器: {player} → {server}"
+    info_1: "正在将玩家跳转至目标服务器: §e{player} → §e{server}"
     info_2: "你将会跳转至服务器: §2{server} §r在 §e5 §r秒后"
 
   online: "§2 在线:"
