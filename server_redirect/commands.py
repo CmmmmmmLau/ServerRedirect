@@ -12,8 +12,7 @@ from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
 from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
 
-import constants
-import serverStatusAPI
+from . import constants, serverStatusAPI
 
 
 def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:

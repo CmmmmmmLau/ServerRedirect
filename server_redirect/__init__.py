@@ -1,7 +1,6 @@
 from mcdreforged.api.all import *
 
-import commands
-import constants
+from . import commands, constants
 
 config = constants.ServerList
 
