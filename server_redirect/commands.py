@@ -12,7 +12,7 @@ from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
 from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
 
-from . import constants, serverStatusAPI
+from server_redirect import constants, serverStatusAPI
 
 
 def rtr(I18nKey: str, *args, **kwargs) -> RTextMCDRTranslation:
@@ -52,7 +52,7 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
             )
             text += RTextList(
                 RText(rtr("player_list")),
-                RText(",".join(serverStatus[i].playerList))
+                RText(", ".join(serverStatus[i].playerList))
             )
             text += RText("\n")
         else:
@@ -105,11 +105,14 @@ def registerCommand(server: PluginServerInterface, config: constants.ServerList)
                   .runs(functools.partial(redirectPlayer, server=key, config=value)))
         nodeRedirect.then(nodeServer)
 
+    nodeReload = getLiteral("reload", 3).runs(lambda src: server.load_config_simple("ServerList.json", target_class=constants.ServerList))
+
     server.register_command(
         nodeRoot
         .then(nodeList)
         .then(nodeRedirect)
         .then(nodeSelfRedirect)
+        .then(nodeReload)
     )
 
     server.register_help_message("!!online", rtr("help_summary"))

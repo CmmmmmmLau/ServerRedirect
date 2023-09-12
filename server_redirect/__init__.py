@@ -1,6 +1,6 @@
 from mcdreforged.api.all import *
 
-from . import commands, constants
+from server_redirect import commands, constants
 
 config = constants.ServerList
 

@@ -6,6 +6,12 @@
   "author": "Cmmmmmm",
   "link": "https://github.com/CmmmmmmLau/ServerRedirect",
   "dependencies": {
-    "mcdreforged": ">=2.0.0-alpha.1"
-  }
+    "mcdreforged": ">=2.10"
+  },
+  "resources": [
+        "lang",
+        "README.md",
+        "README_EN.md",
+        "LICENSE"
+    ]
 }
