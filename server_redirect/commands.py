@@ -65,6 +65,7 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
         ServerInterface.get_instance().tell(source, text)
 
 
+@new_thread
 def redirectPlayer(source: CommandSource, context: dict, server: str, config: constants.ServerConfig):
     player = context["Target Player"]
     source.reply(rtr("redirect.info_1", player=player, server=server))
