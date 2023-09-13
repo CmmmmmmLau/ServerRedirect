@@ -27,7 +27,7 @@ Server Redirect
 任何问题或者建议请提交 `issue` 或 `Pull request`
 ***
 ## 食用教程
-1. 像往常一下先把Minecraft服务器跑起来然后去 [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) 下载对应的服务端 模组/插件 并放入对应文件夹内.
+1. 像往常一样先把Minecraft服务器跑起来然后去 [Server Redirect](https://legacy.curseforge.com/minecraft/mc-mods/server-redirect) 下载对应的服务端 模组/插件 并放入对应文件夹内.
 2. 下载该插件并运行一次以便生成配置文件.
 3. 修改这个配置文件, 并将你的服务器地址和端口填进去. **目前暂时还不支持 SRV 记录.**
 4. 通过 `!!server reload` 来刷新配置文件, 没有刷新成功就手动重载插件.
