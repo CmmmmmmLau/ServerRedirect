@@ -16,6 +16,7 @@ If you are looking for build a high version modded Minecraft(>1.12) server group
 ***
 ## Demo
 ![demo](./demo/demo.gif)
+![demo](./demo/demo2.gif)
 
 ***
 ## Note
@@ -61,4 +62,4 @@ Any problem or suggest, please Create `New issue` or `Pull request`
 - `!!server <Target Server>`: A client side command for player redirect himself to another server
 - `!!server list`: Display the status of server group
 - `!!server reload`: Reload the config file. If it doesn't work reload the plugin manual in !!MCDR plugin
-- `!!server redirect <Target Server>` <Target Player>: Command for administrator to manually redirect player to another server
+- `!!server redirect <Target Server> <Target Player>`: Command for administrator to manually redirect player to another server

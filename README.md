@@ -14,6 +14,7 @@ Server Redirect
 ***
 ## 演示
 ![demo](./demo/demo.gif)
+![demo](./demo/demo2.gif)
 
 ***
 ## 重要事项
@@ -59,4 +60,4 @@ Server Redirect
 - `!!server <Target Server>`: 只能由客户端发起的指令, 将玩家自己转发到指定服务器.
 - `!!server list`: 显示服务器群组的状态.
 - `!!server reload`: 重载配置文件. 如果不起效请通过 !!MCDR plugin 手动重载插件
-- `!!server redirect <Target Server>` <Target Player>: 管理员权限的指令, 将玩家转发到指定的服务器
+- `!!server redirect <Target Server> <Target Player>`: 管理员权限的指令, 将玩家转发到指定的服务器
