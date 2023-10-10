@@ -58,6 +58,7 @@ def printServerList(source: Union[CommandSource, str], config: constants.ServerL
             text += RText("\n")
         else:
             text += RText(rtr("offline"))
+            text += RText("\n")
 
     if isinstance(source, CommandSource):
         source.reply(text)
