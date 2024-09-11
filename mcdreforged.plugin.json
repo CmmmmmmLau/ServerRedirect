@@ -1,12 +1,12 @@
 {
   "id": "server_redirect",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "Server Redirect",
   "description": "An plugin for use with ServerDirect Mod in Minecraft",
   "author": "Cmmmmmm",
   "link": "https://github.com/CmmmmmmLau/ServerRedirect",
   "dependencies": {
-    "mcdreforged": ">=2.10"
+    "mcdreforged": ">=2.13"
   },
   "resources": [
         "lang",

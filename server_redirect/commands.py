@@ -9,7 +9,7 @@ from mcdreforged.command.builder.nodes.basic import Literal
 from mcdreforged.command.command_source import CommandSource, PlayerCommandSource
 from mcdreforged.minecraft.rtext.style import RColor, RStyle
 from mcdreforged.minecraft.rtext.text import RAction, RText, RTextList
-from mcdreforged.plugin.server_interface import PluginServerInterface, ServerInterface
+from mcdreforged.plugin.si.plugin_server_interface import PluginServerInterface, ServerInterface
 from mcdreforged.translation.translation_text import RTextMCDRTranslation
 
 from server_redirect import constants, serverStatusAPI
